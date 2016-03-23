@@ -1,0 +1,4 @@
+suites:
+  default:
+    namespace: ConstantNull\Backstubber
+    psr4_prefix: ConstantNull\Backstubber

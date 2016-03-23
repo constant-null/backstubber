@@ -8,9 +8,12 @@
         "php": ">=5.4.0",
         "league/flysystem": "~1.0"
     },
+    "require-dev": {
+        "phpspec/phpspec": "~2.5"
+    },
     "autoload": {
         "psr-4": {
-            "ConstantNull\\Backstubber": "src/"
+            "ConstantNull\\Backstubber\\": "src/"
         }
     },
     "authors": [
