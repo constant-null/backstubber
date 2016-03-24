@@ -53,6 +53,18 @@ class ContentProcessor
     }
 
     /**
+     * Immediately replaces part of content using regular expression
+     *
+     * @param $searchPattern
+     * @param $replaceWith
+     * @return $this
+     */
+    public function doRegexpReplace($searchPattern, $replaceWith)
+    {
+        $this->content = preg_replace($searchPattern, $replaceWith, $this->content);
+    }
+
+    /**
      * Add replacement for processing
      *
      * @param $searchFor

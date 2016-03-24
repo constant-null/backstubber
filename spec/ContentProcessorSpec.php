@@ -45,4 +45,14 @@ class ContentProcessorSpec extends ObjectBehavior
         $this->doReplace('1701 B', '1701 C');
         $this->getContent()->shouldBeEqualTo('Enterprise NCC 1701 C');
     }
+
+    function it_can_replace_using_regexp()
+    {
+        $info = 'The captain of the Starship Enterprise is: [ captain ]';
+
+        $this->setContent($info);
+        $this->doRegexpReplace('/\[\s*captain\s*\]/', 'James T Kirk');
+
+        $this->getContent()->shouldBeEqualTo('The captain of the Starship Enterprise is: James T Kirk');
+    }
 }
