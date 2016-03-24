@@ -62,6 +62,8 @@ class StringProcessor
     public function doRegexpReplace($searchPattern, $replaceWith)
     {
         $this->data = preg_replace($searchPattern, $replaceWith, $this->data);
+
+        return $this;
     }
 
     /**
