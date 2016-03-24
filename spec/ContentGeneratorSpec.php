@@ -47,4 +47,16 @@ class ContentGeneratorSpec extends ObjectBehavior
 
         $this->getContent()->shouldBeEqualTo('The captain of the Starship Voyager is: Kathryn Janeway');
     }
+
+    function it_should_avoid_naming_conflicts()
+    {
+        $constellations = 'Star, Star, StarStar, StarStarStar';
+
+        $this->setContent($constellations);
+        $this->replace('Star', 'x1')
+             ->replace('StarStar', 'x2')
+             ->replace('StarStarStar', 'x3')
+             ->generate();
+        $this->getContent()->shouldBeEqualTo('x1, x1, x2, x3');
+    }
 }

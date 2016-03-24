@@ -60,7 +60,6 @@ class ContentGenerator
         $this->endDelimiter = $end;
 
         // for chaining
-
         return $this;
     }
 
@@ -94,7 +93,6 @@ class ContentGenerator
         $this->replacements[$searchFor] = $replaceWith;
 
         // for chaining
-
         return $this;
     }
 
@@ -122,14 +120,24 @@ class ContentGenerator
         $this->processor->replace($searchFor, $replaceWith);
     }
 
-
     /**
-     * Start replacing data;
+     * Start replacing data
      *
+     * @param $forceOrder bool keep user defined order of replacements (conflicts possible)
      * @return $this
      */
-    public function generate()
+    public function generate($forceOrder = false)
     {
+         // sort the replacements by descending
+         // (in that way some problems with replacements naming can be avoided)
+        if ( !$forceOrder ) {
+            array_multisort(
+                array_map('mb_strlen', $this->replacements),
+                $this->replacements,
+                SORT_DESC
+            );
+        }
+
         // decide which function will be used
         $replaceFunc = ( $this->isDelimitersUsed() ) ? 'replaceWithRegexp' : 'replaceBasic';
 
@@ -140,7 +148,6 @@ class ContentGenerator
         $this->processor->process();
 
         // for chaining
-
         return $this;
     }
 }
