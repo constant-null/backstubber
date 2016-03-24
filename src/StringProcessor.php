@@ -7,7 +7,7 @@ class StringProcessor
     /**
      * @var string processed content
      */
-    protected $content;
+    protected $data;
 
     /**
      * array of searchable parts and their replacements
@@ -19,11 +19,11 @@ class StringProcessor
     /**
      * Set content for processing
      *
-     * @param $content string
+     * @param $data string
      */
-    public function setContent($content)
+    public function setData($data)
     {
-        $this->content = $content;
+        $this->data = $data;
     }
 
     /**
@@ -31,9 +31,9 @@ class StringProcessor
      *
      * @return string string
      */
-    public function getContent()
+    public function getData()
     {
-        return $this->content;
+        return $this->data;
     }
 
     /**
@@ -45,7 +45,7 @@ class StringProcessor
      */
     public function doReplace($searchFor, $replaceWith)
     {
-        $this->content = str_replace($searchFor, $replaceWith, $this->content);
+        $this->data = str_replace($searchFor, $replaceWith, $this->data);
 
         // for chaining
 
@@ -61,7 +61,7 @@ class StringProcessor
      */
     public function doRegexpReplace($searchPattern, $replaceWith)
     {
-        $this->content = preg_replace($searchPattern, $replaceWith, $this->content);
+        $this->data = preg_replace($searchPattern, $replaceWith, $this->data);
     }
 
     /**
@@ -91,7 +91,7 @@ class StringProcessor
 
         $searchFor = array_keys($this->replacements);
         $replaceWith = array_values($this->replacements);
-        $this->content = str_replace($searchFor, $replaceWith, $this->content);
+        $this->data = str_replace($searchFor, $replaceWith, $this->data);
 
         // clearing replacements
         $this->replacements = [];
