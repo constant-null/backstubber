@@ -17,7 +17,7 @@ class StringProcessor
     protected $replacements = [];
 
     /**
-     * Set content for processing
+     * Set data for processing
      *
      * @param $data string
      */
@@ -27,7 +27,7 @@ class StringProcessor
     }
 
     /**
-     * Get current content
+     * Get current data
      *
      * @return string string
      */
@@ -37,7 +37,7 @@ class StringProcessor
     }
 
     /**
-     * Immediately replaces part of content
+     * Immediately replaces part of data
      *
      * @param $searchFor
      * @param $replaceWith
@@ -53,7 +53,7 @@ class StringProcessor
     }
 
     /**
-     * Immediately replaces part of content using regular expression
+     * Immediately replaces part of data using regular expression
      *
      * @param $searchPattern
      * @param $replaceWith
