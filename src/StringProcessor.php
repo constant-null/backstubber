@@ -5,7 +5,9 @@ namespace ConstantNull\Backstubber;
 class StringProcessor
 {
     /**
-     * @var string processed content
+     * processed content
+     * 
+     * @var string
      */
     protected $data;
 
@@ -39,8 +41,8 @@ class StringProcessor
     /**
      * Immediately replaces part of data
      *
-     * @param $searchFor
-     * @param $replaceWith
+     * @param $searchFor string
+     * @param $replaceWith string
      * @return $this
      */
     public function doReplace($searchFor, $replaceWith)
@@ -55,8 +57,8 @@ class StringProcessor
     /**
      * Immediately replaces part of data using regular expression
      *
-     * @param $searchPattern
-     * @param $replaceWith
+     * @param $searchPattern string
+     * @param $replaceWith string
      * @return $this
      */
     public function doRegexpReplace($searchPattern, $replaceWith)
@@ -67,10 +69,10 @@ class StringProcessor
     }
 
     /**
-     * Add replacement for processing
+     * Add replacement to processing list
      *
-     * @param $searchFor
-     * @param $replaceWith
+     * @param $searchFor string
+     * @param $replaceWith string
      * @return $this
      */
     public function replace($searchFor, $replaceWith)
