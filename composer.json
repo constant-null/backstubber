@@ -3,7 +3,7 @@
     "description": "Helps to generate full PHP files from stubs",
     "type": "utility",
     "license": "MIT",
-    "keywords": ["php", "stub", "generator"],
+    "keywords": ["php", "stub", "generator", "template"],
     "require": {
         "php": ">=5.4.0",
         "league/flysystem": "~1.0"
