@@ -21,4 +21,30 @@ class ContentGeneratorSpec extends ObjectBehavior
             'This is the story of the Starship Enterprise. Its mission: to explore the strange new worlds where no man has gone before'
         );
     }
+
+    function it_can_do_replacements_using_delimiter()
+    {
+        $testSquare = 'The captain of the Starship Enterprise is: [ captain ]';
+
+        $this->setContent($testSquare);
+        $this->setDelimiters('[', ']')
+             ->replace('captain', 'James T Kirk')
+             ->generate();
+        $this->getContent()->shouldBeEqualTo('The captain of the Starship Enterprise is: James T Kirk');
+
+        $testBlade = 'The captain of the Starship Enterprise is: {{ captain }}';
+        $this->setContent($testBlade);
+        $this->setDelimiters('{{', '}}')
+            ->replace('captain', 'Jean Luc Picard')
+            ->generate();
+
+        // and even with extra spaces
+        $testPercentage = 'The captain of the Starship Voyager is: %captain  %';
+        $this->setContent($testPercentage);
+        $this->setDelimiters('%', '%')
+            ->replace('captain', 'Kathryn Janeway')
+            ->generate();
+
+        $this->getContent()->shouldBeEqualTo('The captain of the Starship Voyager is: Kathryn Janeway');
+    }
 }
