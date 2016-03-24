@@ -5,7 +5,7 @@ namespace spec\ConstantNull\Backstubber;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ContentProcessorSpec extends ObjectBehavior
+class StringProcessorSpec extends ObjectBehavior
 {
     function it_is_receives_and_returns_content()
     {

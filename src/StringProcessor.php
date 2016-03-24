@@ -2,7 +2,7 @@
 
 namespace ConstantNull\Backstubber;
 
-class ContentProcessor
+class StringProcessor
 {
     /**
      * @var string processed content
