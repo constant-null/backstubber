@@ -1,6 +1,6 @@
 <?php
 
-namespace ConstantNull\Backstubber;
+namespace ConstantNull\Backstubber\Core;
 
 class StringProcessor
 {
@@ -12,7 +12,9 @@ class StringProcessor
     protected $data;
 
     /**
-     * array of searchable parts and their replacements
+     * Store searchable parts and their replacements
+     * array index - part to be replaced,
+     * array value - replacement itself
      *
      * @var array
      */

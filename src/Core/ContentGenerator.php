@@ -1,14 +1,9 @@
 <?php
 
-namespace ConstantNull\Backstubber;
+namespace ConstantNull\Backstubber\Core;
 
-class ContentGenerator
+class ContentGenerator extends StringProcessor
 {
-    /**
-     * @var StringProcessor
-     */
-    protected $processor = null;
-
     /**
      * @var string
      */
@@ -18,23 +13,6 @@ class ContentGenerator
      * @var string
      */
     protected $endDelimiter = '';
-
-    /**
-     * Store searchable parts and their replacements
-     * array index - part to be replaced,
-     * array value - replacement itself
-     *
-     * @var array
-     */
-    protected $replacements = [];
-
-    /**
-     * ContentGenerator constructor.
-     */
-    public function __construct()
-    {
-        $this->processor = new StringProcessor();
-    }
 
     /**
      * Check if the delimiters was set
@@ -69,7 +47,7 @@ class ContentGenerator
      */
     public function setContent($content)
     {
-        $this->processor->setData($content);
+        $this->setData($content);
     }
 
     /**
@@ -78,22 +56,7 @@ class ContentGenerator
      */
     public function getContent()
     {
-        return $this->processor->getData();
-    }
-
-    /**
-     * Add replacement to processing list
-     *
-     * @param $searchFor string
-     * @param $replaceWith string
-     * @return $this
-     */
-    public function replace($searchFor, $replaceWith)
-    {
-        $this->replacements[$searchFor] = $replaceWith;
-
-        // for chaining
-        return $this;
+        return $this->getData();
     }
 
     /**
@@ -106,7 +69,7 @@ class ContentGenerator
     {
         $pattern = "/\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter}/u";
 
-        $this->processor->doRegexpReplace($pattern, $replaceWith);
+        $this->doRegexpReplace($pattern, $replaceWith);
     }
 
     /**
@@ -117,7 +80,7 @@ class ContentGenerator
      */
     protected function replaceBasic($searchFor, $replaceWith)
     {
-        $this->processor->replace($searchFor, $replaceWith);
+        $this->doReplace($searchFor, $replaceWith);
     }
 
     /**
@@ -144,8 +107,6 @@ class ContentGenerator
         foreach ( $this->replacements as $searchFor => $replaceWith ) {
             $this->$replaceFunc($searchFor, $replaceWith);
         }
-
-        $this->processor->process();
 
         // for chaining
         return $this;

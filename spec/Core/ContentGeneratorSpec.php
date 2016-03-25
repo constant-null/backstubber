@@ -1,6 +1,6 @@
 <?php
 
-namespace spec\ConstantNull\Backstubber;
+namespace spec\ConstantNull\Backstubber\Core;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
