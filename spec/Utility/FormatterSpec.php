@@ -34,4 +34,27 @@ class FormatterSpec extends ObjectBehavior
         $formattedRaces = "'Klingon', 'Vulcan', 'Andorian', 'Borg'";
         $this::formatArray($races, false)->shouldBeEqualTo($formattedRaces);
     }
+
+    function it_can_prepare_variable_line()
+    {
+        // preparing string variable
+        $this::formatVariable('scienceOfficer', 'Mr. Spock')
+            ->shouldBeEqualTo('$scienceOfficer = \'Mr. Spock\';');
+
+        // preparing numeric variable
+        $this::formatVariable('crewComplement', 430)
+            ->shouldBeEqualTo('$crewComplement = 430;');
+
+        // preparing boolean variable
+        $this::formatVariable('shieldsUp', false)
+            ->shouldBeEqualTo('$shieldsUp = false;');
+    }
+
+    function it_can_prepare_property_line()
+    {
+        // there is no need to test other variable types such string or boolean,
+        // because this function use formatVariable function for base formatting
+        $this::formatProperty('protected', 'photonTorpedoesCount', 5)
+            ->shouldBeEqualTo('protected $photonTorpedoesCount = 5;');
+    }
 }
