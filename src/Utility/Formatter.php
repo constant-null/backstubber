@@ -26,8 +26,32 @@ class Formatter
         return $output;
     }
 
+    /**
+     * Add quotes at the ends of the string
+     *
+     * @param $sting
+     * @return string
+     */
     public function formatString($sting)
     {
         return "'$sting'";
+    }
+
+    /**
+     * @param $name variable name
+     * @param $value value of variable
+     * @return string formatted
+     */
+    public function formatVariable($name, $value)
+    {
+        if (is_string($value)) {
+            $value = self::formatString($value);
+        }
+
+        if (is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        }
+
+        return "\$$name = $value;";
     }
 }
