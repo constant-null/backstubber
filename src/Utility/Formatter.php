@@ -38,9 +38,11 @@ class Formatter
     }
 
     /**
+     * Generates stub ready variable line
+     *
      * @param $name variable name
-     * @param $value value of variable
-     * @return string formatted
+     * @param $value value of the variable
+     * @return string
      */
     public function formatVariable($name, $value)
     {
@@ -53,5 +55,18 @@ class Formatter
         }
 
         return "\$$name = $value;";
+    }
+
+    /**
+     * Generates stub ready property
+     *
+     * @param $keywords property keywords such as protected | public static
+     * @param $name property name
+     * @param $value value of the property
+     * @return string
+     */
+    public function formatProperty($keywords, $name, $value)
+    {
+        return $keywords . ' ' . self::formatVariable($name, $value);
     }
 }
