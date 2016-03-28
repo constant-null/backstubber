@@ -25,4 +25,9 @@ class Formatter
 
         return $output;
     }
+
+    public function formatString($sting)
+    {
+        return "'$sting'";
+    }
 }
