@@ -7,6 +7,12 @@ use Prophecy\Argument;
 
 class FormatterSpec extends ObjectBehavior
 {
+    function it_can_format_string()
+    {
+        // actually all that is needed is add quotes
+        $this::formatString('Mr. Spock')->shouldBeEqualTo("'Mr. Spock'");
+    }
+
     function it_can_format_array()
     {
         $races = ['Klingon', 'Vulcan', 'Andorian', 'Borg'];
