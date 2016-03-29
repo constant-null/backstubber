@@ -11,7 +11,7 @@ class Formatter
      * @param bool $braces add array braces to output
      * @return string
      */
-    public function formatArray(array $array, $braces = true)
+    public static function formatArray(array $array, $braces = true)
     {
         $output = implode($array, "', '");
 
@@ -33,7 +33,7 @@ class Formatter
      * @param $value scalar type value
      * @return string
      */
-    public function formatScalar($value)
+    public static function formatScalar($value)
     {
         if (is_string($value)) {
             $value = "'$value'";
@@ -53,7 +53,7 @@ class Formatter
      * @param $value value of the variable
      * @return string
      */
-    public function formatVariable($name, $value)
+    public static function formatVariable($name, $value)
     {
         $value = self::formatScalar($value);
 
@@ -68,7 +68,7 @@ class Formatter
      * @param $value value of the property
      * @return string
      */
-    public function formatProperty($keywords, $name, $value)
+    public static function formatProperty($keywords, $name, $value)
     {
         return $keywords . ' ' . self::formatVariable($name, $value);
     }
