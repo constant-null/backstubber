@@ -1,7 +1,7 @@
 # Meet the _Backstubber_, the PHP file generator
 
-[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/constant-null/backstubber)
-[![GitHub release](https://img.shields.io/github/release/qubyte/rubidium.svg?style=flat-square)](https://github.com/constant-null/backstubber)
+[![GitHub license](https://img.shields.io/github/license/constant-null/backstubber.svg)](http://badges.mit-license.org/)
+[![Packagist](https://img.shields.io/packagist/v/constant-null/backstubber.svg?style=flat-square)](https://packagist.org/packages/constant-null/backstubber)
 [![Travis](https://img.shields.io/travis/constant-null/backstubber.svg?style=flat-square)](https://travis-ci.org/constant-null/backstubber/settings)
 
  Backstubber makes generation of PHP code files from templates fast and easy.
