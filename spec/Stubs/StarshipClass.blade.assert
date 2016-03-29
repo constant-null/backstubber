@@ -1,0 +1,11 @@
+<?php
+namespace Federation\Ships;
+
+class Enterprise
+{
+    protected $captain = 'James T. Kirk';
+
+    protected $officers = ['James T Kirk', 'Mr. Spock', 'Scott Montgomery', 'Pavel Chekov', 'Nyota Uhura', 'hikaru sulu'];
+
+    protected $crew = 430;
+}
