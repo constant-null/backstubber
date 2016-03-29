@@ -59,8 +59,8 @@ class FileGenerator extends ContentProcessor
      * Add variable to replacement list, without any formatting.
      * May be usefull when inserting class/variable/trait names, control structures, etc.
      *
-     * @param $name
-     * @param $value
+     * @param $name string
+     * @param $value string
      * @return $this
      */
     public function setRaw($name, $value)
