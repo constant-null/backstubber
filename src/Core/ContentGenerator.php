@@ -65,7 +65,7 @@ class ContentGenerator extends StringProcessor
      * @param $searchFor string
      * @param $replaceWith string
      */
-    protected function replaceWithRegexp($searchFor, $replaceWith)
+    private function replaceWithRegexp($searchFor, $replaceWith)
     {
         $pattern = "/\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter}/u";
 
@@ -78,7 +78,7 @@ class ContentGenerator extends StringProcessor
      * @param $searchFor string
      * @param $replaceWith string
      */
-    protected function replaceBasic($searchFor, $replaceWith)
+    private function replaceBasic($searchFor, $replaceWith)
     {
         $this->doReplace($searchFor, $replaceWith);
     }
