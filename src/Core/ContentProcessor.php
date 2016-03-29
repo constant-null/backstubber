@@ -2,7 +2,7 @@
 
 namespace ConstantNull\Backstubber\Core;
 
-class ContentGenerator extends StringProcessor
+class ContentProcessor extends StringProcessor
 {
     /**
      * @var string
@@ -42,7 +42,8 @@ class ContentGenerator extends StringProcessor
     }
 
     /**
-     * Set content for processing
+     * Set content for processing (setData alias)
+     *
      * @param $content
      */
     public function setContent($content)
@@ -51,7 +52,7 @@ class ContentGenerator extends StringProcessor
     }
 
     /**
-     * get processed content
+     * get processed content (getData alias)
      * @return string
      */
     public function getContent()
@@ -89,7 +90,7 @@ class ContentGenerator extends StringProcessor
      * @param $forceOrder bool keep user defined order of replacements (conflicts possible)
      * @return $this
      */
-    public function generate($forceOrder = false)
+    public function process($forceOrder = false)
     {
          // sort the replacements by descending
          // (in that way some problems with replacements naming can be avoided)

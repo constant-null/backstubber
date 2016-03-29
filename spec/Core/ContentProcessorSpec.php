@@ -5,7 +5,7 @@ namespace spec\ConstantNull\Backstubber\Core;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 
-class ContentGeneratorSpec extends ObjectBehavior
+class ContentProcessorSpec extends ObjectBehavior
 {
     function it_can_do_basic_replacements()
     {
@@ -15,7 +15,7 @@ class ContentGeneratorSpec extends ObjectBehavior
 
         $this->replace('StarshipName', 'Starship Enterprise')
              ->replace('MissionDescription', 'to explore the strange new worlds where no man has gone before')
-             ->generate();
+             ->process();
 
         $this->getContent()->shouldBe(
             'This is the story of the Starship Enterprise. Its mission: to explore the strange new worlds where no man has gone before'
@@ -29,21 +29,21 @@ class ContentGeneratorSpec extends ObjectBehavior
         $this->setContent($testSquare);
         $this->setDelimiters('[', ']')
              ->replace('captain', 'James T Kirk')
-             ->generate();
+             ->process();
         $this->getContent()->shouldBeEqualTo('The captain of the Starship Enterprise is: James T Kirk');
 
         $testBlade = 'The captain of the Starship Enterprise is: {{ captain }}';
         $this->setContent($testBlade);
         $this->setDelimiters('{{', '}}')
             ->replace('captain', 'Jean Luc Picard')
-            ->generate();
+            ->process();
 
         // and even with extra spaces
         $testPercentage = 'The captain of the Starship Voyager is: %captain  %';
         $this->setContent($testPercentage);
         $this->setDelimiters('%', '%')
             ->replace('captain', 'Kathryn Janeway')
-            ->generate();
+            ->process();
 
         $this->getContent()->shouldBeEqualTo('The captain of the Starship Voyager is: Kathryn Janeway');
     }
@@ -56,7 +56,7 @@ class ContentGeneratorSpec extends ObjectBehavior
         $this->replace('Star', 'x1')
              ->replace('StarStar', 'x2')
              ->replace('StarStarStar', 'x3')
-             ->generate();
+             ->process();
         $this->getContent()->shouldBeEqualTo('x1, x1, x2, x3');
     }
 }
