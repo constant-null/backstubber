@@ -12,6 +12,9 @@ class FormatterSpec extends ObjectBehavior
         // quotes added to string values
         $this::formatScalar('Mr. Spock')->shouldBeEqualTo("'Mr. Spock'");
 
+        // return empty quotes on empty strings
+        $this::formatScalar('')->shouldBeEqualTo("''");
+
         // returns numeric value as a string
         $this::formatScalar(1701)->shouldBeEqualTo('1701');
 
