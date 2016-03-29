@@ -27,14 +27,23 @@ class Formatter
     }
 
     /**
-     * Add quotes at the ends of the string
+     * Prepares scalar value
+     * (adds quotes to the ends of the string, replaces booleans with literal true|false)
      *
-     * @param $sting
+     * @param $value scalar type value
      * @return string
      */
-    public function formatString($sting)
+    public function formatScalar($value)
     {
-        return "'$sting'";
+        if (is_string($value)) {
+            $value = "'$value'";
+        }
+
+        if (is_bool($value)) {
+            $value = $value ? 'true' : 'false';
+        }
+
+        return "$value";
     }
 
     /**
@@ -46,13 +55,7 @@ class Formatter
      */
     public function formatVariable($name, $value)
     {
-        if (is_string($value)) {
-            $value = self::formatString($value);
-        }
-
-        if (is_bool($value)) {
-            $value = $value ? 'true' : 'false';
-        }
+        $value = self::formatScalar($value);
 
         return "\$$name = $value;";
     }

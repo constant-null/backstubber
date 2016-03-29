@@ -7,10 +7,16 @@ use Prophecy\Argument;
 
 class FormatterSpec extends ObjectBehavior
 {
-    function it_can_format_string()
+    function it_can_format_scalar()
     {
-        // actually all that is needed is add quotes
-        $this::formatString('Mr. Spock')->shouldBeEqualTo("'Mr. Spock'");
+        // quotes added to string values
+        $this::formatScalar('Mr. Spock')->shouldBeEqualTo("'Mr. Spock'");
+
+        // returns numeric value as a string
+        $this::formatScalar(1701)->shouldBeEqualTo('1701');
+
+        // returns literal representation of booleans
+        $this::formatScalar(true)->shouldBeEqualTo('true');
     }
 
     function it_can_format_array()
