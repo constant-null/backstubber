@@ -30,7 +30,7 @@ class Formatter
      * Prepares scalar value
      * (adds quotes to the ends of the string, replaces booleans with literal true|false)
      *
-     * @param $value scalar type value
+     * @param mixed $value scalar type value
      * @return string
      */
     public static function formatScalar($value)
@@ -49,8 +49,8 @@ class Formatter
     /**
      * Generates stub ready variable line
      *
-     * @param $name variable name
-     * @param $value value of the variable
+     * @param string $name variable name
+     * @param mixed $value value of the variable
      * @return string
      */
     public static function formatVariable($name, $value)
@@ -63,9 +63,9 @@ class Formatter
     /**
      * Generates stub ready property
      *
-     * @param $keywords property keywords such as protected | public static
-     * @param $name property name
-     * @param $value value of the property
+     * @param string $keywords property keywords such as protected | public static
+     * @param string $name property name
+     * @param mixed $value value of the property
      * @return string
      */
     public static function formatProperty($keywords, $name, $value)
