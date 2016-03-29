@@ -25,8 +25,8 @@ class FileGeneratorSpec extends ObjectBehavior
              ->set('crew', 430)
              ->setRaw('class', 'Enterprise')
              ->setRaw('namespace', 'Federation\\Ships')
-             ->generate('vfs://output/EnterpriseClass.php');
+             ->generate('vfs://output/temp/EnterpriseClass.php');
 
-        expect(file_get_contents('vfs://output/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipClass.blade.assert'));
+        expect(file_get_contents('vfs://output/temp/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipClass.blade.assert'));
     }
 }

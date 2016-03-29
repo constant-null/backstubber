@@ -76,7 +76,15 @@ class FileGenerator extends ContentProcessor
      */
     public function generate($outputPath)
     {
+        // do content replacement
         $this->process();
+
+        // check if directory exist, if not create it
+        $baseDir = dirname($outputPath);
+        if (!is_dir($baseDir)) {
+            mkdir($baseDir, 700, true);
+        }
+
         file_put_contents($outputPath, $this->getContent());
     }
 }
