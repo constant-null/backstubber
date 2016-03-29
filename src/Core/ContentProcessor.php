@@ -94,18 +94,18 @@ class ContentProcessor extends StringProcessor
     {
          // sort the replacements by descending
          // (in that way some problems with replacements naming can be avoided)
-        if ( !$forceOrder ) {
+        if (!$forceOrder) {
             array_multisort(
-                array_map('mb_strlen', $this->replacements),
-                $this->replacements,
-                SORT_DESC
+                array_map('mb_strlen', array_keys($this->replacements)),
+                SORT_DESC,
+                $this->replacements
             );
         }
 
         // decide which function will be used
-        $replaceFunc = ( $this->isDelimitersUsed() ) ? 'replaceWithRegexp' : 'replaceBasic';
+        $replaceFunc = $this->isDelimitersUsed() ? 'replaceWithRegexp' : 'replaceBasic';
 
-        foreach ( $this->replacements as $searchFor => $replaceWith ) {
+        foreach ($this->replacements as $searchFor => $replaceWith) {
             $this->$replaceFunc($searchFor, $replaceWith);
         }
 

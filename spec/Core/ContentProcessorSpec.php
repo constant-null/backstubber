@@ -35,15 +35,15 @@ class ContentProcessorSpec extends ObjectBehavior
         $testBlade = 'The captain of the Starship Enterprise is: {{ captain }}';
         $this->setContent($testBlade);
         $this->setDelimiters('{{', '}}')
-            ->replace('captain', 'Jean Luc Picard')
-            ->process();
+             ->replace('captain', 'Jean Luc Picard')
+             ->process();
 
         // and even with extra spaces
         $testPercentage = 'The captain of the Starship Voyager is: %captain  %';
         $this->setContent($testPercentage);
         $this->setDelimiters('%', '%')
-            ->replace('captain', 'Kathryn Janeway')
-            ->process();
+             ->replace('captain', 'Kathryn Janeway')
+             ->process();
 
         $this->getContent()->shouldBeEqualTo('The captain of the Starship Voyager is: Kathryn Janeway');
     }

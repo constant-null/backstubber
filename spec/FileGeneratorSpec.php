@@ -15,7 +15,7 @@ class FileGeneratorSpec extends ObjectBehavior
         $this->vfs = vfsStream::setup('output');
     }
 
-    function it_handles_basic_var_replaces()
+    function it_handles_basic_var_replaces_with_delimiters()
     {
         $officers = ['James T Kirk', 'Mr. Spock', 'Scott Montgomery', 'Pavel Chekov', 'Nyota Uhura', 'hikaru sulu'];
         $this->useStub('spec/Stubs/StarshipClass.blade.stub')
@@ -27,6 +27,21 @@ class FileGeneratorSpec extends ObjectBehavior
              ->setRaw('namespace', 'Federation\\Ships')
              ->generate('vfs://output/temp/EnterpriseClass.php');
 
-        expect(file_get_contents('vfs://output/temp/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipClass.blade.assert'));
+        expect(file_get_contents('vfs://output/temp/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipClass.assert'));
+    }
+
+    function it_handles_basic_var_replacements_with_prefix()
+    {
+        $officers = ['James T Kirk', 'Mr. Spock', 'Scott Montgomery', 'Pavel Chekov', 'Nyota Uhura', 'hikaru sulu'];
+        $this->useStub('spec/Stubs/StarshipClass.prefix.stub')
+//             ->withPrefix('Dummy')
+             ->set('DummyOfficers', $officers)
+             ->set('DummyCaptain', 'James T. Kirk')
+             ->set('DummyCrew', 430)
+             ->setRaw('DummyClass', 'Enterprise')
+             ->setRaw('DummyClassNamespace', 'Federation\\Ships')
+             ->generate('vfs://output/temp/EnterpriseClass.php');
+
+        expect(file_get_contents('vfs://output/temp/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipClass.assert'));
     }
 }
