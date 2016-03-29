@@ -8,7 +8,7 @@ php:
   - hhvm
 
 before_script:
-  - travis_retry composer install --prefer-source --no-interaction
+  - travis_retry composer install --prefer-source --no-interaction --prefer-lowest
 
 script:
   - vendor/bin/phpspec run --config=phpspec.yml --no-interaction
