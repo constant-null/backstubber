@@ -1,0 +1,11 @@
+<?php
+namespace DummyClassNamespace;
+
+class DummyClass
+{
+    protected $captain = DummyCaptain;
+
+    protected $officers = DummyOfficers;
+
+    protected $crew = DummyCrew;
+}
