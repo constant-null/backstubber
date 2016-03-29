@@ -4,9 +4,10 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c250b3dcfa0d461de8123a7a83532554",
-    "content-hash": "0c1a066fa66b057f86ae372a55eb8b8e",
-    "packages": [
+    "hash": "032eba749ab2996cc7888a8a1ed62902",
+    "content-hash": "ef10be36eeb312ae04b0f2af394dae0b",
+    "packages": [],
+    "packages-dev": [
         {
             "name": "bossa/phpspec2-expect",
             "version": "1.0.3",
@@ -938,7 +939,6 @@
             "time": "2016-02-23 15:16:06"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],
