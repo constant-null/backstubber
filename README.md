@@ -1,6 +1,6 @@
 # Meet the _Backstubber_, the PHP file generator
 
-[![GitHub license](https://img.shields.io/github/license/constant-null/backstubber.svg)](http://badges.mit-license.org/)
+[![GitHub license](https://img.shields.io/github/license/constant-null/backstubber.svg?style=flat-square)](http://badges.mit-license.org/)
 [![Packagist](https://img.shields.io/packagist/v/constant-null/backstubber.svg?style=flat-square)](https://packagist.org/packages/constant-null/backstubber)
 [![Travis](https://img.shields.io/travis/constant-null/backstubber.svg?style=flat-square)](https://travis-ci.org/constant-null/backstubber/settings)
 
