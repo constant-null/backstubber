@@ -111,6 +111,27 @@ class Enterprise
 }
 ```
 
+If you using the same prefix for all your placeholders (just like "Dummy" prefix in example above), you can use `withPrefix` method.
+So the following code and the one shown above, will have the same results.
+
+```php
+use ConstantNull/Backstubber/FileGenerator as Generator;
+
+$generator = new Generator();
+$generator->useStub('some/path/to/stubs/DummyStarship.stub')
+          ->withPrefix('Dummy')
+          ->set('Officers', ['James T Kirk', 'Mr. Spock', 'Scott Montgomery'])
+          ->set('Captain', 'James T. Kirk')
+          ->set('Crew', 430)
+
+          // newly added methods
+          ->setRaw('Class', 'Enterprise')
+          ->setRaw('ClassNamespace', 'Federation\\Ships')
+
+          // saving new file
+          ->generate('path/to/generated/classes/EnterpriseClass.php');
+```
+
 #### Templates with delimiters
 
 Using the basic text substitution with or without prefixes like "Dummy" as in the example above is good,

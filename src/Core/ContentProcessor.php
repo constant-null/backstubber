@@ -7,6 +7,11 @@ class ContentProcessor extends StringProcessor
     /**
      * @var string
      */
+    protected $globalPrefix = '';
+
+    /**
+     * @var string
+     */
     protected $beginDelimiter = '';
 
     /**
@@ -15,8 +20,33 @@ class ContentProcessor extends StringProcessor
     protected $endDelimiter = '';
 
     /**
+     * Set prefix which will prepend all substitutions
+     *
+     * @param $prefix string
+     * @return $this
+     */
+    public function setPrefix($prefix)
+    {
+        $this->globalPrefix = $prefix;
+
+        // for chaining
+        return $this;
+    }
+
+    /**
+     * Check if global prefix was set
+     *
+     * @return bool
+     */
+    public function isPrefixUsed()
+    {
+        return (bool)$this->globalPrefix;
+    }
+
+    /**
      * Check if the delimiters was set
      * (which means replacing will be done using regular expressions)
+     *
      * @return bool
      */
     public function isDelimitersUsed()
@@ -106,6 +136,9 @@ class ContentProcessor extends StringProcessor
         $replaceFunc = $this->isDelimitersUsed() ? 'replaceWithRegexp' : 'replaceBasic';
 
         foreach ($this->replacements as $searchFor => $replaceWith) {
+            if ($this->isPrefixUsed()) {
+                $searchFor = $this->globalPrefix . $searchFor;
+            }
             $this->$replaceFunc($searchFor, $replaceWith);
         }
 

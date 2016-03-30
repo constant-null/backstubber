@@ -22,6 +22,22 @@ class ContentProcessorSpec extends ObjectBehavior
         );
     }
 
+    function it_can_do_replacements_with_prefix()
+    {
+        $data = 'This is the story of the StarshipName. Its mission: StarshipMissionDescription';
+
+        $this->setContent($data);
+
+        $this->setPrefix('Starship')
+             ->replace('Name', 'Starship Enterprise')
+             ->replace('MissionDescription', 'to explore the strange new worlds where no man has gone before')
+             ->process();
+
+        $this->getContent()->shouldBe(
+            'This is the story of the Starship Enterprise. Its mission: to explore the strange new worlds where no man has gone before'
+        );
+    }
+
     function it_can_do_replacements_using_delimiter()
     {
         $testSquare = 'The captain of the Starship Enterprise is: [ captain ]';

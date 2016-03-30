@@ -22,7 +22,7 @@ class FileGenerator extends ContentProcessor
     }
 
     /**
-     * Set begin and end delimiters which will be used to detect parts to be replaced
+     * Set begin and end delimiters which will be used to detect parts to be replaced (alias for setDelimiters function)
      *
      * @param $begin string
      * @param $end string
@@ -32,6 +32,17 @@ class FileGenerator extends ContentProcessor
     {
         // return is for chaining
         return $this->setDelimiters($begin, $end);
+    }
+
+    /**
+     * Set prefix which will prepend all substitutions (alias for setPrefix function)
+     *
+     * @param $prefix string
+     * @return $this
+     */
+    public function withPrefix($prefix)
+    {
+        return $this->setPrefix($prefix);
     }
 
     /**
