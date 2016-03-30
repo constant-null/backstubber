@@ -111,6 +111,8 @@ class Enterprise
 }
 ```
 
+#### Using prefixes
+
 If you using the same prefix for all your placeholders (just like "Dummy" prefix in example above), you can use `withPrefix` method.
 So the following code and the one shown above, will have the same results.
 
