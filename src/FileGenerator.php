@@ -82,8 +82,10 @@ class FileGenerator extends ContentProcessor
 
     /**
      * save generated file to path
+     * returns true if file was successfully created false otherwise
      *
      * @param $outputPath string
+     * @return bool
      */
     public function generate($outputPath)
     {
@@ -96,6 +98,6 @@ class FileGenerator extends ContentProcessor
             mkdir($baseDir, 700, true);
         }
 
-        file_put_contents($outputPath, $this->getContent());
+        return (bool)file_put_contents($outputPath, $this->getContent());
     }
 }
