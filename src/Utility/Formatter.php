@@ -26,6 +26,8 @@ class Formatter
      */
     protected static function isArrayMultiline($array)
     {
+        if (empty($array)) return false;
+
         switch (self::getArrayMode()) {
             case self::ARR_MODE_INLINE:
                 $isMultiline = false;
