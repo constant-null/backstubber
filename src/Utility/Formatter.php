@@ -21,6 +21,8 @@ class Formatter
     protected static $lastLineIndent = 0;
 
     /**
+     * Determines if array should be formatted as a multiline one or not
+     *
      * @param array $array
      * @return bool
      */
@@ -43,8 +45,10 @@ class Formatter
     }
 
     /**
+     * Converts number of tabs to the corresponding amound of spaces
+     *
      * @param integer $tabs
-     * @return mixed
+     * @return string
      */
     protected static function indent($tabs)
     {
@@ -53,6 +57,8 @@ class Formatter
     }
 
     /**
+     * Prepare array elements for formatting.
+     *
      * @param array $array
      * @return array
      */
@@ -72,6 +78,9 @@ class Formatter
     }
 
     /**
+     * Add indents to multiline text
+     * (Indents can be set using Formatter::setIndents method)
+     *
      * @param string $text
      * @return array
      */
@@ -90,17 +99,34 @@ class Formatter
         return implode(PHP_EOL, $indentedLines);
     }
 
+    /**
+     * Set array formatting mode
+     *
+     * @param int $arrayMode Formatter::ARR_MODE_*
+     */
     public function setArrayMode($arrayMode)
     {
         self::$arrayMode = $arrayMode;
     }
 
+    /**
+     * Get array formatting mode
+     *
+     * @return int
+     */
     public function getArrayMode()
     {
         return self::$arrayMode;
     }
 
-    public function setIndent($firstLine, $midLines, $lastLine)
+    /**
+     * Set indent. Used by multiline data formatters
+     *
+     * @param $firstLine first line indent
+     * @param $midLines indent of the all lines between the first and last lines
+     * @param $lastLine last line indent
+     */
+    public function setIndents($firstLine, $midLines, $lastLine)
     {
         self::$firstLineIndent = $firstLine;
         self::$midLinesIndent = $midLines;
