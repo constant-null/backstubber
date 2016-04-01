@@ -8,7 +8,7 @@ class Formatter
 {
     const ARR_MODE_AUTO = 0;
 
-    const ARR_MODE_INLINE = 1;
+    const ARR_MODE_ONELINE = 1;
 
     const ARR_MODE_MULTILINE = 2;
 
@@ -29,7 +29,7 @@ class Formatter
         if (empty($array)) return false;
 
         switch (self::getArrayMode()) {
-            case self::ARR_MODE_INLINE:
+            case self::ARR_MODE_ONELINE:
                 $isMultiline = false;
                 break;
             case self::ARR_MODE_MULTILINE:
@@ -126,6 +126,8 @@ class Formatter
 
         if ($braces) {
             $output = implode(['[', $output, ']'], $eol);
+        } else {
+            $output = $eol . $output . $eol;
         }
 
         // region do indention
