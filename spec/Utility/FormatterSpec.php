@@ -25,7 +25,7 @@ class FormatterSpec extends ObjectBehavior
 
     function it_can_format_empty_arrays()
     {
-        Formatter::setIndents(0, 3, 2);
+        Formatter::setBaseIndent(2);
 
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
         $this::formatArray([], false)->shouldBeEqualTo('');
@@ -48,7 +48,7 @@ class FormatterSpec extends ObjectBehavior
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
 
         //set indent for this example
-        Formatter::setIndents(0, 3, 2);
+        Formatter::setBaseIndent(2);
 
         // default array formatting:
         // empty array
@@ -75,7 +75,7 @@ class FormatterSpec extends ObjectBehavior
         $races = ['Klingon', 'Vulcan', 'Andorian', 'Borg'];
 
         //set indent for this example
-        Formatter::setIndents(0, 3, 2);
+        Formatter::setBaseIndent(2);
 
         // array with data
         $formattedRaces = "'Klingon', 'Vulcan', 'Andorian', 'Borg'";
@@ -112,7 +112,7 @@ class FormatterSpec extends ObjectBehavior
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
 
         // set indent for this example
-        Formatter::setIndents(0, 3, 2);
+        Formatter::setBaseIndent(2);
 
         // inline associative array
         $formattedRaces = "['Captain' => 'Jean Luc Picard', 'First officer' => 'William T. Riker', 'Tactical Officer' => 'Tasha Yar']";
@@ -148,7 +148,7 @@ class FormatterSpec extends ObjectBehavior
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
 
         // set indent for this example
-        Formatter::setIndents(0, 3, 2);
+        Formatter::setBaseIndent(2);
 
         // inline associative array
         $formattedRaces = "'Captain' => 'Jean Luc Picard', 'First officer' => 'William T. Riker', 'Tactical Officer' => 'Tasha Yar'";

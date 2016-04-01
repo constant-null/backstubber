@@ -14,11 +14,7 @@ class Formatter
 
     protected static $arrayMode = self::ARR_MODE_AUTO;
 
-    protected static $firstLineIndent = 0;
-
-    protected static $midLinesIndent = 1;
-
-    protected static $lastLineIndent = 0;
+    protected static $baseIndent = 1;
 
     /**
      * Determines if array should be formatted as a multiline one or not
@@ -79,24 +75,25 @@ class Formatter
 
     /**
      * Add indents to multiline text
-     * (Indents can be set using Formatter::setIndents method)
+     *
      *
      * @param string $text
+     * @param integer $indent indent in tabs
+     * @param bool $skipFirstLine = false not apply indent to the first line of text
      * @return array
      */
-    protected static function indentLines($text)
+    protected static function indentLines($text, $indent, $skipFirstLine = false)
     {
         $lines = explode(PHP_EOL, $text);
 
-        $indentedLines[] = self::indent(self::$firstLineIndent) . array_shift($lines);
+        // (つ◕.◕)つ━☆ﾟ.*･｡ﾟ
+        !$skipFirstLine || $preparedLines[] = array_shift($lines);
 
-        while (count($lines) > 1) {
-            $indentedLines[] = self::indent(self::$midLinesIndent) . array_shift($lines);
+        foreach ($lines as $line) {
+            $preparedLines[] = self::indent($indent) . $line;
         }
 
-        $indentedLines[] = self::indent(self::$lastLineIndent) . array_shift($lines);
-
-        return implode(PHP_EOL, $indentedLines);
+        return implode(PHP_EOL, $preparedLines);
     }
 
     /**
@@ -120,17 +117,23 @@ class Formatter
     }
 
     /**
-     * Set indent. Used by multiline data formatters
+     * Set indent. Used in multiline data formatting
      *
-     * @param $firstLine first line indent
-     * @param $midLines indent of the all lines between the first and last lines
-     * @param $lastLine last line indent
+     * @param integer $indent default indent
      */
-    public function setIndents($firstLine, $midLines, $lastLine)
+    public function setBaseIndent($indent)
     {
-        self::$firstLineIndent = $firstLine;
-        self::$midLinesIndent = $midLines;
-        self::$lastLineIndent = $lastLine;
+        self::$baseIndent = $indent;
+    }
+
+    /**
+     * Return currently set indent.
+     *
+     * @return integer $indent default indent
+     */
+    public function getBaseIndent()
+    {
+        return self::$baseIndent;
     }
 
     /**
@@ -150,15 +153,20 @@ class Formatter
 
         $output = implode($array, ', ' . $eol);
 
+        if ($isMultiline) {
+            // apply base indent to array elements
+            $output = self::indentLines($output, 1);
+        }
+
         if ($braces) {
             $output = implode(['[', $output, ']'], $eol);
         } else {
             $output = $eol . $output . $eol;
         }
 
-        // region do indention
         if ($isMultiline) {
-            $output = self::indentLines($output);
+            // apply indent to array entire array
+            $output = self::indentLines($output, self::getBaseIndent(), true);
         }
 
         return $output;
