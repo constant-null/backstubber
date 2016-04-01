@@ -14,7 +14,7 @@ class Formatter
 
     protected static $arrayMode = self::ARR_MODE_AUTO;
 
-    protected static $baseIndent = 1;
+    protected static $baseIndent = 0;
 
     /**
      * Determines if array should be formatted as a multiline one or not
@@ -203,7 +203,9 @@ class Formatter
     {
         $value = self::formatScalar($value);
 
-        return "\$$name = $value;";
+        $declaration = "\$$name = $value;";
+
+        return self::indent(self::getBaseIndent()) . $declaration;
     }
 
     /**
@@ -216,6 +218,8 @@ class Formatter
      */
     public static function formatProperty($keywords, $name, $value)
     {
-        return $keywords . ' ' . self::formatVariable($name, $value);
+        $declaration = "$keywords \$$name = $value;";
+
+        return self::indent(self::getBaseIndent()) . $declaration;
     }
 }

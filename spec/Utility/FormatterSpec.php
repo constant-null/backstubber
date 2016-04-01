@@ -8,6 +8,18 @@ use Prophecy\Argument;
 
 class FormatterSpec extends ObjectBehavior
 {
+    function let()
+    {
+        //set indent for this example
+        Formatter::setBaseIndent(2);
+    }
+
+    function letgo()
+    {
+        //set default value
+        Formatter::setBaseIndent(0);
+    }
+
     function it_can_format_scalar()
     {
         // quotes added to string values
@@ -25,8 +37,6 @@ class FormatterSpec extends ObjectBehavior
 
     function it_can_format_empty_arrays()
     {
-        Formatter::setBaseIndent(2);
-
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
         $this::formatArray([], false)->shouldBeEqualTo('');
         $this::formatArray([])->shouldBeEqualTo('[]');
@@ -46,9 +56,6 @@ class FormatterSpec extends ObjectBehavior
 
         // reset formatting mode to default
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
-
-        //set indent for this example
-        Formatter::setBaseIndent(2);
 
         // default array formatting:
         // empty array
@@ -73,9 +80,6 @@ class FormatterSpec extends ObjectBehavior
     function it_can_format_array_without_brackets()
     {
         $races = ['Klingon', 'Vulcan', 'Andorian', 'Borg'];
-
-        //set indent for this example
-        Formatter::setBaseIndent(2);
 
         // array with data
         $formattedRaces = "'Klingon', 'Vulcan', 'Andorian', 'Borg'";
@@ -111,9 +115,6 @@ class FormatterSpec extends ObjectBehavior
         // reset formatting mode to default
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
 
-        // set indent for this example
-        Formatter::setBaseIndent(2);
-
         // inline associative array
         $formattedRaces = "['Captain' => 'Jean Luc Picard', 'First officer' => 'William T. Riker', 'Tactical Officer' => 'Tasha Yar']";
 
@@ -147,9 +148,6 @@ class FormatterSpec extends ObjectBehavior
         // reset formatting mode to default
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
 
-        // set indent for this example
-        Formatter::setBaseIndent(2);
-
         // inline associative array
         $formattedRaces = "'Captain' => 'Jean Luc Picard', 'First officer' => 'William T. Riker', 'Tactical Officer' => 'Tasha Yar'";
 
@@ -173,6 +171,9 @@ class FormatterSpec extends ObjectBehavior
 
     function it_can_prepare_variable_line()
     {
+        //set default value
+        Formatter::setBaseIndent(0);
+
         // preparing string variable
         $this::formatVariable('scienceOfficer', 'Mr. Spock')
             ->shouldBeEqualTo('$scienceOfficer = \'Mr. Spock\';');
@@ -188,6 +189,9 @@ class FormatterSpec extends ObjectBehavior
 
     function it_can_prepare_property_line()
     {
+        //set default value
+        Formatter::setBaseIndent(0);
+
         // there is no need to test other variable types such string or boolean,
         // because this function use formatVariable function for base formatting
         $this::formatProperty('protected', 'photonTorpedoesCount', 5)
