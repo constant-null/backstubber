@@ -101,7 +101,7 @@ class Formatter
      *
      * @param int $arrayMode Formatter::ARR_MODE_*
      */
-    public function setArrayMode($arrayMode)
+    public static function setArrayMode($arrayMode)
     {
         self::$arrayMode = $arrayMode;
     }
@@ -111,7 +111,7 @@ class Formatter
      *
      * @return int
      */
-    public function getArrayMode()
+    public static function getArrayMode()
     {
         return self::$arrayMode;
     }
@@ -121,7 +121,7 @@ class Formatter
      *
      * @param integer $indent default indent
      */
-    public function setBaseIndent($indent)
+    public static function setBaseIndent($indent)
     {
         self::$baseIndent = $indent;
     }
@@ -131,7 +131,7 @@ class Formatter
      *
      * @return integer $indent default indent
      */
-    public function getBaseIndent()
+    public static function getBaseIndent()
     {
         return self::$baseIndent;
     }
