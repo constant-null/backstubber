@@ -8,7 +8,7 @@ class Formatter
 {
     const ARR_MODE_AUTO = 0;
 
-    const ARR_MODE_ONELINE = 1;
+    const ARR_MODE_SINGLELINE = 1;
 
     const ARR_MODE_MULTILINE = 2;
 
@@ -27,7 +27,7 @@ class Formatter
         if (empty($array)) return false;
 
         switch (self::getArrayMode()) {
-            case self::ARR_MODE_ONELINE:
+            case self::ARR_MODE_SINGLELINE:
                 $isMultiline = false;
                 break;
             case self::ARR_MODE_MULTILINE:

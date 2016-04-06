@@ -41,7 +41,7 @@ class FormatterSpec extends ObjectBehavior
         $this::formatArray([], false)->shouldBeEqualTo('');
         $this::formatArray([])->shouldBeEqualTo('[]');
 
-        $this::setArrayMode(Formatter::ARR_MODE_ONELINE);
+        $this::setArrayMode(Formatter::ARR_MODE_SINGLELINE);
         $this::formatArray([], false)->shouldBeEqualTo('');
         $this::formatArray([])->shouldBeEqualTo('[]');
 
@@ -89,7 +89,7 @@ class FormatterSpec extends ObjectBehavior
         $this::formatArray($races, false)->shouldBeEqualTo($formattedRaces);
 
         // force inline
-        $this::setArrayMode(Formatter::ARR_MODE_ONELINE);
+        $this::setArrayMode(Formatter::ARR_MODE_SINGLELINE);
         $this::formatArray($races, false)->shouldBeEqualTo($formattedRaces);
 
         $formattedRaces = "
@@ -118,7 +118,7 @@ class FormatterSpec extends ObjectBehavior
         // inline associative array
         $formattedRaces = "['Captain' => 'Jean Luc Picard', 'First officer' => 'William T. Riker', 'Tactical Officer' => 'Tasha Yar']";
 
-        $this::setArrayMode(Formatter::ARR_MODE_ONELINE);
+        $this::setArrayMode(Formatter::ARR_MODE_SINGLELINE);
         $this::formatArray($crew)->shouldBeEqualTo($formattedRaces);
 
         // multiline arrays
@@ -151,7 +151,7 @@ class FormatterSpec extends ObjectBehavior
         // inline associative array
         $formattedRaces = "'Captain' => 'Jean Luc Picard', 'First officer' => 'William T. Riker', 'Tactical Officer' => 'Tasha Yar'";
 
-        $this::setArrayMode(Formatter::ARR_MODE_ONELINE);
+        $this::setArrayMode(Formatter::ARR_MODE_SINGLELINE);
         $this::formatArray($crew, false)->shouldBeEqualTo($formattedRaces);
 
         // multiline arrays
