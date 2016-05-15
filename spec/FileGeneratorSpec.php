@@ -58,4 +58,24 @@ class FileGeneratorSpec extends ObjectBehavior
 
         expect(file_get_contents('vfs://output/temp/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipClass.assert'));
     }
+
+    function it_should_automatically_set_line_indentation()
+    {
+        $officers = [
+            'Captain' =>'James T Kirk',
+            'First officer' => 'Mr. Spock',
+            'Engineer' => 'Scott Montgomery',
+        ];
+
+        $this->useStub('spec/Stubs/StarshipClass.blade.stub')
+            ->withDelimiters('{{', '}}')
+            ->set('officers', $officers)
+            ->set('captain', 'James T. Kirk')
+            ->set('crew', 430)
+            ->setRaw('class', 'Enterprise')
+            ->setRaw('namespace', 'Federation\\Ships')
+            ->generate('vfs://output/temp/EnterpriseClass.php');
+
+        expect(file_get_contents('vfs://output/temp/EnterpriseClass.php'))->toBeEqualTo(file_get_contents('spec/Stubs/StarshipMultilineClass.assert'));
+    }
 }
