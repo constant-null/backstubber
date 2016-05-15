@@ -2,8 +2,15 @@
 
 namespace ConstantNull\Backstubber\Core;
 
-class ContentProcessor extends StringProcessor
+class ContentProcessor
 {
+    /**
+     * processed content
+     *
+     * @var string
+     */
+    protected $content;
+
     /**
      * @var string
      */
@@ -14,10 +21,19 @@ class ContentProcessor extends StringProcessor
      */
     protected $beginDelimiter = '';
 
+
     /**
      * @var string
      */
     protected $endDelimiter = '';
+    /**
+     * Store searchable parts and their replacements
+     * array index - part to be replaced,
+     * array value - replacement itself
+     *
+     * @var array
+     */
+    protected $replacements = [];
 
     /**
      * Set prefix which will prepend all substitutions
@@ -72,22 +88,68 @@ class ContentProcessor extends StringProcessor
     }
 
     /**
-     * Set content for processing (setData alias)
+     * Set content for processing
      *
      * @param $content
      */
     public function setContent($content)
     {
-        $this->setData($content);
+        $this->content = $content;
     }
 
     /**
-     * get processed content (getData alias)
+     * get processed content
      * @return string
      */
     public function getContent()
     {
-        return $this->getData();
+        return $this->content;
+    }
+
+    /**
+     * Add replacement to processing list
+     *
+     * @param $searchFor string
+     * @param $replaceWith string
+     * @return StringProcessor
+     */
+    public function replace($searchFor, $replaceWith)
+    {
+        $this->replacements[$searchFor] = $replaceWith;
+
+        // for chaining
+
+        return $this;
+    }
+
+    /**
+     * Immediately replaces part of data using regular expression
+     *
+     * @param $searchPattern string
+     * @param $replaceWith string
+     * @return StringProcessor
+     */
+    public function doRegexpReplace($searchPattern, $replaceWith)
+    {
+        $this->content = preg_replace($searchPattern, $replaceWith, $this->content);
+
+        return $this;
+    }
+
+    /**
+     * Immediately replaces part of data
+     *
+     * @param $searchFor string
+     * @param $replaceWith string
+     * @return StringProcessor
+     */
+    public function doReplace($searchFor, $replaceWith)
+    {
+        $this->content = str_replace($searchFor, $replaceWith, $this->content);
+
+        // for chaining
+
+        return $this;
     }
 
     /**
@@ -104,13 +166,17 @@ class ContentProcessor extends StringProcessor
     }
 
     /**
-     * Replace data using str_replace
+     * Replace data using str_replace using prefix (if set)
      *
      * @param $searchFor string
      * @param $replaceWith string
      */
     private function replaceBasic($searchFor, $replaceWith)
     {
+        if ($this->isPrefixUsed()) {
+            $searchFor = $this->globalPrefix . $searchFor;
+        }
+
         $this->doReplace($searchFor, $replaceWith);
     }
 
@@ -136,9 +202,6 @@ class ContentProcessor extends StringProcessor
         $replaceFunc = $this->isDelimitersUsed() ? 'replaceWithRegexp' : 'replaceBasic';
 
         foreach ($this->replacements as $searchFor => $replaceWith) {
-            if ($this->isPrefixUsed()) {
-                $searchFor = $this->globalPrefix . $searchFor;
-            }
             $this->$replaceFunc($searchFor, $replaceWith);
         }
 
