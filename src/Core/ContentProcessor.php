@@ -160,6 +160,7 @@ class ContentProcessor
      */
     private function replaceWithRegexp($searchFor, $replaceWith)
     {
+        // TODO: fix regexp crash when [[ delimiter specified
         $pattern = "/\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter}/u";
 
         $this->doRegexpReplace($pattern, $replaceWith);
