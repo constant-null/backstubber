@@ -64,7 +64,7 @@ class FileGeneratorSpec extends ObjectBehavior
         $officers = [
             'Captain' =>'James T Kirk',
             'First officer' => 'Mr. Spock',
-            'Engineer' => 'Scott Montgomery',
+            'Engineer' => 'Scott Montgomery'
         ];
 
         $this->useStub('spec/Stubs/StarshipClass.blade.stub')

@@ -169,6 +169,34 @@ class FormatterSpec extends ObjectBehavior
         $this::formatArray($crew, false)->shouldBeEqualTo($formattedCrew);
     }
 
+    function it_can_format_nested_arrays()
+    {
+        Formatter::setBaseIndent(0);
+        $officers = [
+            'Captain' =>'James T Kirk',
+            'First officer' => 'Mr. Spock',
+            'Engineer' => 'Scott Montgomery',
+            'Passengers' => [
+                'Sarek',
+                'Amanda'
+            ]
+        ];
+
+        $formattedOfficers = "
+    'Captain' => 'James T Kirk',
+    'First officer' => 'Mr. Spock',
+    'Engineer' => 'Scott Montgomery',
+    'Passengers' => [
+        'Sarek',
+        'Amanda'
+    ]
+";
+
+        Formatter::setArrayMode(Formatter::ARR_MODE_MULTILINE);
+
+        $this::formatArray($officers, false)->shouldBeEqualTo($formattedOfficers);
+    }
+
     function it_can_prepare_variable_line()
     {
         //set default value

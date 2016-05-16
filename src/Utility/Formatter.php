@@ -63,7 +63,11 @@ class Formatter
         $isAssoc = Arr::isAssoc($array);
 
         array_walk($array, function (&$value, $index, $withIndexes = false) {
-            $value = self::formatScalar($value);
+            if (is_array($value)) {
+                $value = self::formatArray($value);
+            } else {
+                $value = self::formatScalar($value);
+            }
 
             if ($withIndexes) {
                 $value = self::formatScalar($index) . ' => ' . $value;
@@ -165,7 +169,7 @@ class Formatter
         }
 
         if ($isMultiline) {
-            // apply indent to array entire array
+            // apply indent to entire array
             $output = self::indentLines($output, self::getBaseIndent(), true);
         }
 
