@@ -131,7 +131,18 @@ class ContentProcessor
      */
     public function doRegexpReplace($searchPattern, $replaceWith)
     {
-        $this->content = preg_replace($searchPattern, $replaceWith, $this->content);
+        $this->content = preg_replace_callback(
+            $searchPattern,
+            function($matches) use ($replaceWith) {
+                $output = isset($matches['indent']) ? $matches['indent'] : '';
+                $output .= isset($matches['start']) ? $matches['start'] : '';
+                $output .= isset($matches['target']) ? $replaceWith : '';
+                $output .= isset($matches['end']) ? $matches['end'] : '';
+
+                return $output;
+            },
+            $this->content
+        );
 
         return $this;
     }
@@ -161,8 +172,8 @@ class ContentProcessor
     private function replaceWithRegexp($searchFor, $replaceWith)
     {
         // TODO: fix regexp crash when [[ delimiter specified
-        $pattern = "/\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter}/u";
-
+        $pattern = "/^(?'indent'\\s*)(?'start'.*?)(?'target'\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter})(?'end'.*)/u";
+        echo $pattern.PHP_EOL;
         $this->doRegexpReplace($pattern, $replaceWith);
     }
 

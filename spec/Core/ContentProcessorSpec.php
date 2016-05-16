@@ -30,7 +30,7 @@ class ContentProcessorSpec extends ObjectBehavior
     {
         $info = 'The captain of the Starship Enterprise is: [ captain ]';
         $this->setContent($info);
-        $this->doRegexpReplace('/\[\s*captain\s*\]/', 'James T Kirk');
+        $this->doRegexpReplace('/(?\'target\'\[\s*captain\s*\])/', 'James T Kirk');
         $this->getContent()->shouldBeEqualTo('The captain of the Starship Enterprise is: James T Kirk');
     }
 
