@@ -137,7 +137,6 @@ class ContentProcessor
             $searchPattern,
             function($matches) use ($replaceWith) {
                 $indent = isset($matches['indent']) ? $matches['indent'] : '';
-                echo (mb_strlen($indent));
                 $output = $indent;
                 $output .= isset($matches['start']) ? $matches['start'] : '';
                 $output .= isset($matches['target']) ? Formatter::indentLines($replaceWith, mb_strlen($indent)/4, true) : '';
@@ -177,7 +176,7 @@ class ContentProcessor
     {
         // TODO: fix regexp crash when [[ delimiter specified
         $pattern = "/(?'indent'[[:blank:]]*)(?'start'.*?)(?'target'\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter})(?'end'.*)/u";
-        echo $pattern.PHP_EOL;
+
         $this->doRegexpReplace($pattern, $replaceWith);
     }
 
