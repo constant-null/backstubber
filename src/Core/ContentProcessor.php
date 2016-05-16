@@ -2,6 +2,8 @@
 
 namespace ConstantNull\Backstubber\Core;
 
+use ConstantNull\Backstubber\Utility\Formatter;
+
 class ContentProcessor
 {
     /**
@@ -134,9 +136,11 @@ class ContentProcessor
         $this->content = preg_replace_callback(
             $searchPattern,
             function($matches) use ($replaceWith) {
-                $output = isset($matches['indent']) ? $matches['indent'] : '';
+                $indent = isset($matches['indent']) ? $matches['indent'] : '';
+                echo (mb_strlen($indent));
+                $output = $indent;
                 $output .= isset($matches['start']) ? $matches['start'] : '';
-                $output .= isset($matches['target']) ? $replaceWith : '';
+                $output .= isset($matches['target']) ? Formatter::indentLines($replaceWith, mb_strlen($indent)/4, true) : '';
                 $output .= isset($matches['end']) ? $matches['end'] : '';
 
                 return $output;
@@ -172,7 +176,7 @@ class ContentProcessor
     private function replaceWithRegexp($searchFor, $replaceWith)
     {
         // TODO: fix regexp crash when [[ delimiter specified
-        $pattern = "/^(?'indent'\\s*)(?'start'.*?)(?'target'\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter})(?'end'.*)/u";
+        $pattern = "/(?'indent'[[:blank:]]*)(?'start'.*?)(?'target'\\{$this->beginDelimiter}\\s*{$searchFor}\\s*\\{$this->endDelimiter})(?'end'.*)/u";
         echo $pattern.PHP_EOL;
         $this->doRegexpReplace($pattern, $replaceWith);
     }

@@ -68,9 +68,9 @@ class FormatterSpec extends ObjectBehavior
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
 
         $formattedRaces = "[
-            'Klingon', 
-            'Vulcan', 
-            'Andorian', 
+            'Klingon',
+            'Vulcan',
+            'Andorian',
             'Borg'
         ]";
 
@@ -93,9 +93,9 @@ class FormatterSpec extends ObjectBehavior
         $this::formatArray($races, false)->shouldBeEqualTo($formattedRaces);
 
         $formattedRaces = "
-            'Klingon', 
-            'Vulcan', 
-            'Andorian', 
+            'Klingon',
+            'Vulcan',
+            'Andorian',
             'Borg'
         ";
 
@@ -123,8 +123,8 @@ class FormatterSpec extends ObjectBehavior
 
         // multiline arrays
         $formattedCrew = "[
-            'Captain' => 'Jean Luc Picard', 
-            'First officer' => 'William T. Riker', 
+            'Captain' => 'Jean Luc Picard',
+            'First officer' => 'William T. Riker',
             'Tactical Officer' => 'Tasha Yar'
         ]";
 
@@ -156,8 +156,8 @@ class FormatterSpec extends ObjectBehavior
 
         // multiline arrays
         $formattedCrew = "
-            'Captain' => 'Jean Luc Picard', 
-            'First officer' => 'William T. Riker', 
+            'Captain' => 'Jean Luc Picard',
+            'First officer' => 'William T. Riker',
             'Tactical Officer' => 'Tasha Yar'
         ";
 

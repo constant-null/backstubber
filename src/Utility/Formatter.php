@@ -82,7 +82,7 @@ class Formatter
      * @param bool $skipFirstLine = false not apply indent to the first line of text
      * @return array
      */
-    protected static function indentLines($text, $indent, $skipFirstLine = false)
+    public static function indentLines($text, $indent, $skipFirstLine = false)
     {
         $lines = explode(PHP_EOL, $text);
 
@@ -90,7 +90,7 @@ class Formatter
         !$skipFirstLine || $preparedLines[] = array_shift($lines);
 
         foreach ($lines as $line) {
-            $preparedLines[] = self::indent($indent) . $line;
+            $preparedLines[] = self::indent($indent) . rtrim($line);
         }
 
         return implode(PHP_EOL, $preparedLines);
