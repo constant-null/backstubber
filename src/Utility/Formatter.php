@@ -15,6 +15,11 @@ class Formatter
     protected static $arrayMode = self::ARR_MODE_AUTO;
 
     /**
+     * @var int psr-2 standard tabulation size
+     */
+    protected static $tabSize = 4;
+
+    /**
      * Determines if array should be formatted as a multiline one or not
      *
      * @param array $array
@@ -39,16 +44,14 @@ class Formatter
     }
 
     /**
-     * Converts number of tabs to the corresponding amound of spaces
+     * Returns empty string with specified length
      *
-     * @param integer $tabs
+     * @param integer $size
      * @return string
      */
-    protected static function indent($tabs)
+    protected static function indent($size)
     {
-        // TODO: use spaces instead of tabs
-        // convert tabs to spaces (PSR-2)
-        return str_pad('', $tabs * 4);
+        return str_pad('', $size);
     }
 
     /**
@@ -138,7 +141,7 @@ class Formatter
 
         if ($isMultiline) {
             // apply base indent to array elements
-            $output = self::indentLines($output, 1);
+            $output = self::indentLines($output, self::$tabSize);
         }
 
         if ($braces) {

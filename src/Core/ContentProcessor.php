@@ -139,7 +139,7 @@ class ContentProcessor
                 $indent = isset($matches['indent']) ? $matches['indent'] : '';
                 $output = $indent;
                 $output .= isset($matches['start']) ? $matches['start'] : '';
-                $output .= isset($matches['target']) ? Formatter::indentLines($replaceWith, mb_strlen($indent)/4, true) : '';
+                $output .= isset($matches['target']) ? Formatter::indentLines($replaceWith, mb_strlen($indent), true) : '';
                 $output .= isset($matches['end']) ? $matches['end'] : '';
 
                 return $output;

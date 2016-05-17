@@ -63,7 +63,7 @@ class FormatterSpec extends ObjectBehavior
         ]";
 
         $formatedArray = $this::formatArray($races);
-        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedRaces);
+        $this::indentLines($formatedArray, 8, true)->shouldBeEqualTo($formattedRaces);
     }
 
     function it_can_format_array_without_brackets()
@@ -92,7 +92,7 @@ class FormatterSpec extends ObjectBehavior
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
 
         $formatedArray = $this::formatArray($races, false);
-        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedRaces);
+        $this::indentLines($formatedArray, 8, true)->shouldBeEqualTo($formattedRaces);
     }
 
     function it_can_format_associative_array_with_brackets()
@@ -122,12 +122,12 @@ class FormatterSpec extends ObjectBehavior
         // associative array should automatically be formatted as multiline
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
         $formatedArray = $this::formatArray($crew);
-        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
+        $this::indentLines($formatedArray, 8, true)->shouldBeEqualTo($formattedCrew);
 
         // force multiline
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
         $formatedArray = $this::formatArray($crew);
-        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
+        $this::indentLines($formatedArray, 8, true)->shouldBeEqualTo($formattedCrew);
     }
 
     function it_can_format_associative_array_without_brackets()
@@ -157,11 +157,11 @@ class FormatterSpec extends ObjectBehavior
         // associative array should automatically be formatted as multiline
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
         $formatedArray = $this::formatArray($crew, false);
-        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
+        $this::indentLines($formatedArray, 8, true)->shouldBeEqualTo($formattedCrew);
 
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
         $formatedArray = $this::formatArray($crew, false);
-        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
+        $this::indentLines($formatedArray, 8, true)->shouldBeEqualTo($formattedCrew);
     }
 
     function it_can_format_nested_arrays()
@@ -189,7 +189,7 @@ class FormatterSpec extends ObjectBehavior
         Formatter::setArrayMode(Formatter::ARR_MODE_MULTILINE);
 
         $formattedArray = $this::formatArray($officers, false);
-        $this::indentLines($formattedArray, 2, true)->shouldBeEqualTo($formattedOfficers);
+        $this::indentLines($formattedArray, 8, true)->shouldBeEqualTo($formattedOfficers);
     }
 
     function it_can_prepare_variable_line()
