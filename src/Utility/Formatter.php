@@ -14,8 +14,6 @@ class Formatter
 
     protected static $arrayMode = self::ARR_MODE_AUTO;
 
-    protected static $baseIndent = 0;
-
     /**
      * Determines if array should be formatted as a multiline one or not
      *
@@ -48,6 +46,7 @@ class Formatter
      */
     protected static function indent($tabs)
     {
+        // TODO: use spaces instead of tabs
         // convert tabs to spaces (PSR-2)
         return str_pad('', $tabs * 4);
     }
@@ -121,26 +120,6 @@ class Formatter
     }
 
     /**
-     * Set indent. Used in multiline data formatting
-     *
-     * @param integer $indent default indent
-     */
-    public static function setBaseIndent($indent)
-    {
-        self::$baseIndent = $indent;
-    }
-
-    /**
-     * Return currently set indent.
-     *
-     * @return integer $indent default indent
-     */
-    public static function getBaseIndent()
-    {
-        return self::$baseIndent;
-    }
-
-    /**
      * Return text representation of array
      *
      * @param array $array input array
@@ -166,11 +145,6 @@ class Formatter
             $output = implode(['[', $output, ']'], $eol);
         } else {
             $output = $eol . $output . $eol;
-        }
-
-        if ($isMultiline) {
-            // apply indent to entire array
-            $output = self::indentLines($output, self::getBaseIndent(), true);
         }
 
         return $output;
@@ -209,7 +183,7 @@ class Formatter
 
         $declaration = "\$$name = $value;";
 
-        return self::indent(self::getBaseIndent()) . $declaration;
+        return $declaration;
     }
 
     /**
@@ -224,6 +198,6 @@ class Formatter
     {
         $declaration = "$keywords \$$name = $value;";
 
-        return self::indent(self::getBaseIndent()) . $declaration;
+        return $declaration;
     }
 }

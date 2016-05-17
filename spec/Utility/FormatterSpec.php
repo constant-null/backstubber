@@ -8,18 +8,6 @@ use Prophecy\Argument;
 
 class FormatterSpec extends ObjectBehavior
 {
-    function let()
-    {
-        //set indent for this example
-        Formatter::setBaseIndent(2);
-    }
-
-    function letgo()
-    {
-        //set default value
-        Formatter::setBaseIndent(0);
-    }
-
     function it_can_format_scalar()
     {
         // quotes added to string values
@@ -74,7 +62,8 @@ class FormatterSpec extends ObjectBehavior
             'Borg'
         ]";
 
-        $this::formatArray($races)->shouldBeEqualTo($formattedRaces);
+        $formatedArray = $this::formatArray($races);
+        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedRaces);
     }
 
     function it_can_format_array_without_brackets()
@@ -101,7 +90,9 @@ class FormatterSpec extends ObjectBehavior
 
         // multiline formating
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
-        $this::formatArray($races, false)->shouldBeEqualTo($formattedRaces);
+
+        $formatedArray = $this::formatArray($races, false);
+        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedRaces);
     }
 
     function it_can_format_associative_array_with_brackets()
@@ -130,11 +121,13 @@ class FormatterSpec extends ObjectBehavior
 
         // associative array should automatically be formatted as multiline
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
-        $this::formatArray($crew)->shouldBeEqualTo($formattedCrew);
+        $formatedArray = $this::formatArray($crew);
+        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
 
         // force multiline
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
-        $this::formatArray($crew)->shouldBeEqualTo($formattedCrew);
+        $formatedArray = $this::formatArray($crew);
+        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
     }
 
     function it_can_format_associative_array_without_brackets()
@@ -163,15 +156,16 @@ class FormatterSpec extends ObjectBehavior
 
         // associative array should automatically be formatted as multiline
         $this::setArrayMode(Formatter::ARR_MODE_AUTO);
-        $this::formatArray($crew, false)->shouldBeEqualTo($formattedCrew);
+        $formatedArray = $this::formatArray($crew, false);
+        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
 
         $this::setArrayMode(Formatter::ARR_MODE_MULTILINE);
-        $this::formatArray($crew, false)->shouldBeEqualTo($formattedCrew);
+        $formatedArray = $this::formatArray($crew, false);
+        $this::indentLines($formatedArray, 2, true)->shouldBeEqualTo($formattedCrew);
     }
 
     function it_can_format_nested_arrays()
     {
-        Formatter::setBaseIndent(0);
         $officers = [
             'Captain' =>'James T Kirk',
             'First officer' => 'Mr. Spock',
@@ -183,25 +177,23 @@ class FormatterSpec extends ObjectBehavior
         ];
 
         $formattedOfficers = "
-    'Captain' => 'James T Kirk',
-    'First officer' => 'Mr. Spock',
-    'Engineer' => 'Scott Montgomery',
-    'Passengers' => [
-        'Sarek',
-        'Amanda'
-    ]
-";
+            'Captain' => 'James T Kirk',
+            'First officer' => 'Mr. Spock',
+            'Engineer' => 'Scott Montgomery',
+            'Passengers' => [
+                'Sarek',
+                'Amanda'
+            ]
+        ";
 
         Formatter::setArrayMode(Formatter::ARR_MODE_MULTILINE);
 
-        $this::formatArray($officers, false)->shouldBeEqualTo($formattedOfficers);
+        $formattedArray = $this::formatArray($officers, false);
+        $this::indentLines($formattedArray, 2, true)->shouldBeEqualTo($formattedOfficers);
     }
 
     function it_can_prepare_variable_line()
     {
-        //set default value
-        Formatter::setBaseIndent(0);
-
         // preparing string variable
         $this::formatVariable('scienceOfficer', 'Mr. Spock')
             ->shouldBeEqualTo('$scienceOfficer = \'Mr. Spock\';');
@@ -217,9 +209,6 @@ class FormatterSpec extends ObjectBehavior
 
     function it_can_prepare_property_line()
     {
-        //set default value
-        Formatter::setBaseIndent(0);
-
         // there is no need to test other variable types such string or boolean,
         // because this function use formatVariable function for base formatting
         $this::formatProperty('protected', 'photonTorpedoesCount', 5)
