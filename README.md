@@ -215,25 +215,6 @@ For now, method accepts one of three parameters, which is:
 2. `Formatter::ARR_MODE_MULTILINE` force backstabber to format all arrays in multi-line format
 3. `Formatter::ARR_MODE_SINGLELINE` force backstabber to format all arrays in single-line format
 
-#### Indentation
-
-For correct multi-line formatting, the base indentation must be set.
-You can do it globally using `ConstantNull\Backstubber\Utility\Formatter::setBaseIndent` (for now it is the only way, but most likely it will change in the future).
-
-`setBaseIndent` receives number of tabulations (soft), the default value is 0.
-You can see the 1 tab indentation in example below (generated indents shown by arrows for clarity)
-
-```php
-class StarshipEnterprise
-{
-    $officers = [
-<-->    'Captain' => 'Jean Luc Picard',
-<-->    'First officer' => 'William T. Riker',
-<-->    'Tactical Officer' => 'Tasha Yar'
-<-->];
-}
-```
-
 ## Authors
 
 This library was developed by me, [Mark Belotskiy](https://github.com/constant-null). Special thanks (as promised) to my friend [Dmitriy Shulgin]() for helping with the name of the library.
