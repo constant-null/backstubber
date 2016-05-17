@@ -84,7 +84,7 @@ class Formatter
      *
      *
      * @param string $text
-     * @param integer $indent indent in tabs
+     * @param integer $indent indent in spaces
      * @param bool $skipFirstLine = false not apply indent to the first line of text
      * @return array
      */
