@@ -25,7 +25,7 @@ class FileGenerator extends ContentProcessor
      * Set begin and end delimiters which will be used to detect parts to be replaced (alias for setDelimiters function)
      *
      * @param $begin string
-     * @param $end string
+     * @param $end   string
      * @return $this
      */
     public function withDelimiters($begin, $end)
@@ -46,38 +46,48 @@ class FileGenerator extends ContentProcessor
     }
 
     /**
-     * Add variable to replacement list
+     * Add variable(s) to replacement list
      * it will automatically format scalar types and arrays,
      * so they text representation will be inserted
      *
-     * @param $name string
-     * @param $value mixed
+     * @param $name  array|string
+     * @param $value null|string|array
      * @return $this
      */
-    public function set($name, $value)
+    public function set($name, $value = null)
     {
-        if (is_array($value)) {
-            $formattedValue = Formatter::formatArray($value);
+        if (is_array($name)) {
+            foreach ($name as $innerName => $innerValue) {
+                $this->replace($innerName, $this->formatValue($innerValue));
+            }
         } else {
-            $formattedValue = Formatter::formatScalar($value);
+            $this->replace($name, $this->formatValue($value));
         }
 
         // return is for chaining
-        return $this->replace($name, $formattedValue);
+        return $this;
     }
 
     /**
-     * Add variable to replacement list, without any formatting.
+     * Add variable(s) to replacement list, without any formatting.
      * May be usefull when inserting class/variable/trait names, control structures, etc.
      *
-     * @param $name string
-     * @param $value string
+     * @param $name  array|string
+     * @param $value null|array|string
      * @return $this
      */
-    public function setRaw($name, $value)
+    public function setRaw($name, $value = null)
     {
+        if (is_array($name)) {
+            foreach ($name as $innerName => $innerValue) {
+                $this->replace($innerName, $innerValue);
+            }
+        } else {
+            $this->replace($name, $value);
+        }
+
         // return is for chaining
-        return $this->replace($name, $value);
+        return $this;
     }
 
     /**
@@ -99,5 +109,20 @@ class FileGenerator extends ContentProcessor
         }
 
         return (bool)file_put_contents($outputPath, $this->getContent());
+    }
+
+    /**
+     * Format a value before processing.
+     *
+     * @param array|string $value
+     * @return array|string
+     */
+    protected function formatValue($value)
+    {
+        if (is_array($value)) {
+            return Formatter::formatArray($value);
+        }
+
+        return Formatter::formatScalar($value);
     }
 }
