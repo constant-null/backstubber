@@ -59,6 +59,13 @@ $generator->useStub('some/path/to/stubs/DummyStarship.stub')
           ->set('DummyCaptain', 'James T. Kirk')
           ->set('DummyCrew', 430)
           ...
+          // or pass an array
+          ->set([
+            'DummyOfficers' => ['James T Kirk', 'Mr. Spock', 'Scott Montgomery'],
+            'DummyCaptain' => 'James T. Kirk',
+            'DummyCrew' => 430
+          ])
+          ...
           // saving new file
           ->generate('path/to/generated/classes/EnterpriseClass.php');
 ```
@@ -90,6 +97,12 @@ $generator->useStub('some/path/to/stubs/DummyStarship.stub')
           // newly added methods
           ->setRaw('DummyClass', 'Enterprise')
           ->setRaw('DummyClassNamespace', 'Federation\\Ships')
+
+          // or pass an array
+          ->setRaw([
+            'DummyClass' => 'Enterprise',
+            'DummyClassNamespace' => 'Federation\\Ships'
+          ])
 
           // saving new file
           ->generate('path/to/generated/classes/EnterpriseClass.php');
