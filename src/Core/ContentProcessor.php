@@ -93,10 +93,13 @@ class ContentProcessor
      * Set content for processing
      *
      * @param $content
+     * @return $this
      */
     public function setContent($content)
     {
         $this->content = $content;
+
+        return $this;
     }
 
     /**
@@ -113,7 +116,7 @@ class ContentProcessor
      *
      * @param $searchFor string
      * @param $replaceWith string
-     * @return StringProcessor
+     * @return $this
      */
     public function replace($searchFor, $replaceWith)
     {
@@ -129,7 +132,7 @@ class ContentProcessor
      *
      * @param $searchPattern string
      * @param $replaceWith string
-     * @return StringProcessor
+     * @return $this
      */
     public function doRegexpReplace($searchPattern, $replaceWith)
     {
@@ -155,7 +158,7 @@ class ContentProcessor
      *
      * @param $searchFor string
      * @param $replaceWith string
-     * @return StringProcessor
+     * @return $this
      */
     public function doReplace($searchFor, $replaceWith)
     {
