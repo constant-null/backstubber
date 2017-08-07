@@ -5,12 +5,16 @@ namespace ConstantNull\Backstubber;
 use ConstantNull\Backstubber\Core\ContentProcessor;
 use ConstantNull\Backstubber\Utility\Formatter;
 
+/**
+ * File  generator service
+ */
 class FileGenerator extends ContentProcessor
 {
     /**
-     * set stub (template) file used in generation
+     * Set stub (template) file used in generation
      *
      * @param $stubPath string path to stub (template file)
+     *
      * @return $this
      */
     public function useStub($stubPath)
@@ -26,6 +30,7 @@ class FileGenerator extends ContentProcessor
      *
      * @param $begin string
      * @param $end   string
+     *
      * @return $this
      */
     public function withDelimiters($begin, $end)
